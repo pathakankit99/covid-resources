@@ -15,7 +15,7 @@ import {
     Select
   } from "@chakra-ui/react"
 
-export default function OxygenSupply() {
+export default function FoodSupply() {
     const [response, setResponse] = useState("") 
     const [name, setName] = useState("")
     const [contact, setContact] = useState(null)
@@ -49,7 +49,7 @@ export default function OxygenSupply() {
        };
        if(phonenumber())
        {
-        await axios.post('/api/oxygen', mongodata)
+        await axios.post('/api/food', mongodata)
         .then(res => {
             // console.log("res is ",res)
             setResponse(res.data.message)
@@ -75,13 +75,13 @@ export default function OxygenSupply() {
     return (
         <div onClick={onOpen} className="action-card pointer-on-hover text-center bg-gray-800 flex items-center text-white p-4 m-4">
                <div>
-               <h3 className="pb-4 text-3xl">Do you know oxygen Supplier?</h3>
+               <h3 className="pb-4 text-3xl">Do you know Food Supplier?</h3>
                <h6 className="">Add to our database</h6>
                </div>
                <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>Add Oxygen Supplier Info</ModalHeader>
+                <ModalHeader>Add Food Supplier Info</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                 <Stack spacing={3}>
