@@ -27,7 +27,11 @@ export default function PlasmaDonors() {
                             <div key={item._id} className="text-xs p-4 bg-white rounded flex flex-wrap justify-evenly m-2">
                             <div className="w-full md:w-3/12">
                                 <h3 className="font-bold uppercase text-lg">{item.name}</h3>
-                                <h6>Age: {item.age}</h6>
+                                {
+                                    item.age?(
+                                        <h6>Age: {item.age}</h6>
+                                    ):(<></>)
+                                }
                             </div>
                             <div className="w-full md:w-3/12">
                                 <h6>State: {item.state}</h6>
@@ -35,8 +39,16 @@ export default function PlasmaDonors() {
                                 <h6>Contact: <a href={"tel:+91"+item.contact}>{item.contact}</a> </h6>
                             </div>
                             <div className="w-full md:w-3/12">
-                                <h6>Date of Recovery: {date}</h6>
-                                <h6>Bloodgroup: {item.bloodgroup}</h6>
+                                {
+                                    item.dor?(
+                                        <h6>Date of Recovery: {date}</h6>
+                                    ):(<></>)
+                                }
+                                {
+                                    item.bloodgroup?(
+                                        <h6>Bloodgroup: {item.bloodgroup}</h6>
+                                    ):(<></>)
+                                }
                             </div>
                         </div>
                         );

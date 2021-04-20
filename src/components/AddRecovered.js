@@ -99,7 +99,6 @@ export default function AddRecovered() {
                     {
                         response?(<h3 className="text-xs bg-yellow-200 p-2">{response}</h3>):(<></>)
                     }
-                    <h5 className="text-sm p-1 bg-blue-200">All fields are important</h5>
                     <Input
                         onChange={(e)=>setName(e.target.value)}
                         type="text"
@@ -107,6 +106,7 @@ export default function AddRecovered() {
                         size="sm"
                         variant="flushed"
                         value={name}
+                        required
                     />
                     <Input
                         type="number"
@@ -123,6 +123,7 @@ export default function AddRecovered() {
                         variant="flushed"
                         value={contact}
                         onChange={(e)=>setContact(e.target.value)}
+                        required
                     />
                     <Select
                         size="sm"
@@ -158,6 +159,7 @@ export default function AddRecovered() {
                         variant="flushed"                                    
                         value={state}
                         onChange={(e)=>setState(e.target.value)}
+                        required
                     >
                         <option value="" >Select State</option>
                         <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -204,6 +206,7 @@ export default function AddRecovered() {
                         variant="flushed"
                         value={city}
                         onChange={(e)=>setCity(e.target.value)}
+                        required
                     />
                     <h6 className="text-xs p-1 bg-green-200">By Clicking on the submit button you acknowledge that this data will be displayed in public.</h6>
                 </Stack>
