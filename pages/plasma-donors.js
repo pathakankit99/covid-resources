@@ -1,0 +1,46 @@
+import React, {useEffect, useState} from 'react'
+import axios from 'axios'
+export default function PlasmaDonors() {
+    
+    const [recoveredPatients, setRecoveredPatients] = useState([])
+    console.log(recoveredPatients)
+    useEffect(() => {
+        axios.get('/api/recovered')
+        .then(res => {
+            setRecoveredPatients(res.data)
+            // console.log(recoveredPatients)
+        })
+    }, [])
+    return (
+        <div className="PlasmaDonorsList">
+            <h2 className="text-3xl text-center p-4">Covid Recovered Patients List</h2>
+                {
+                    recoveredPatients.map((item) => {
+                        const dateObj= new Date(item.dor);
+                        var month = dateObj.getUTCMonth() + 1; //months from 1-12
+                        var day = dateObj.getUTCDate();
+                        var year = dateObj.getUTCFullYear();
+
+                        var date = day + "/" + month + "/" + year;
+                        return (
+                            <div key={item._id} className="text-xs p-4 bg-white rounded flex flex-wrap justify-evenly m-2">
+                            <div className="w-full md:w-3/12">
+                                <h3 className="font-bold uppercase text-lg">{item.name}</h3>
+                                <h6>Age: {item.age}</h6>
+                            </div>
+                            <div className="w-full md:w-3/12">
+                                <h6>State: {item.state}</h6>
+                                <h6>City: {item.city}</h6>
+                                <h6>Contact: <a href={"tel:+91"+item.contact}>{item.contact}</a> </h6>
+                            </div>
+                            <div className="w-full md:w-3/12">
+                                <h6>Date of Recovery: {date}</h6>
+                                <h6>Bloodgroup: {item.bloodgroup}</h6>
+                            </div>
+                        </div>
+                        );
+                    })
+                }
+        </div>
+    );
+}
