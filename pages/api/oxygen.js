@@ -116,7 +116,7 @@ oxygen.post(async(req, res) => {
                         // });
                         if(!check)
                         {
-                            const result = await oxygen.insertOne(person);
+                            const result = await collection.insertOne(person);
                             return res.status(200).json({ message: 'Details added successfully' });
                         }
                         return res.status(400).send('This person already exists in database');
