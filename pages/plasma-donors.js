@@ -1,5 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
+import Link from 'next/link'
+import {
+    IconButton
+  } from "@chakra-ui/react"
+  import {FaHome} from 'react-icons/fa'
 export default function PlasmaDonors() {
     
     const [recoveredPatients, setRecoveredPatients] = useState([])
@@ -13,7 +18,11 @@ export default function PlasmaDonors() {
     }, [])
     return (
         <div style={{minHeight: '100vh', background: '#0dc5c1'}} className="PlasmaDonorsList">
-            <h2 className="text-3xl text-center text-white p-4">Covid Recovered Patients List</h2>
+            <h2 className="text-3xl text-center text-white p-4">
+                <Link href="/" passHref>
+                    <IconButton colorScheme="blue" className="text-white mx-4" aria-label="Home Button" icon={<FaHome/>}/>
+                </Link>
+                Covid Recovered Patients List</h2>
                 {
                    recoveredPatients?(
                     recoveredPatients.map((item) => {
