@@ -12,9 +12,10 @@ export default function PlasmaDonors() {
         })
     }, [])
     return (
-        <div className="PlasmaDonorsList">
-            <h2 className="text-3xl text-center p-4">Covid Recovered Patients List</h2>
+        <div style={{minHeight: '100vh', background: '#0dc5c1'}} className="PlasmaDonorsList">
+            <h2 className="text-3xl text-center text-white p-4">Covid Recovered Patients List</h2>
                 {
+                   recoveredPatients?(
                     recoveredPatients.map((item) => {
                         const dateObj= new Date(item.dor);
                         var month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -40,6 +41,7 @@ export default function PlasmaDonors() {
                         </div>
                         );
                     })
+                   ):(<div className="loader"></div>)
                 }
         </div>
     );
