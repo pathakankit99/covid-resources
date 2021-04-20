@@ -47,7 +47,7 @@ recovered.post(async(req, res) => {
         if(req.method === 'POST'){
             const {name, age, contact, bloodgroup, dor, state, city} = req.body;
             // console.log(req.body)
-            if(name && age && contact && bloodgroup && dor && state && city)
+            if(name && contact && state && city)
             {
                 
                 try{
