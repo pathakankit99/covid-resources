@@ -85,14 +85,14 @@ export default function AddRecovered() {
     return (
         <div onClick={onOpen} className="action-card pointer-on-hover text-center bg-gray-800 flex items-center text-white p-4 m-4">
                <div>
-               <h3 className="pb-4 text-3xl"> Have you recently recovered from Covid?</h3>
-               <h6 className="">Add Yourself to our database</h6>
+               <h3 className="pb-4 text-3xl"> Know a plasma bank or recovered person?</h3>
+               <h6 className="">Add to our database</h6>
                </div>
 
             <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>Add Recovered Patient Info</ModalHeader>
+                <ModalHeader>Add Plasma Info</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                 <Stack spacing={3}>

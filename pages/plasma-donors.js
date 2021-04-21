@@ -24,7 +24,7 @@ export default function PlasmaDonors() {
                 </Link>
                 Covid Recovered Patients List</h2>
                 {
-                   recoveredPatients?(
+                   recoveredPatients.length>0?(
                     recoveredPatients.map((item) => {
                         const dateObj= new Date(item.dor);
                         var month = dateObj.getUTCMonth() + 1; //months from 1-12
