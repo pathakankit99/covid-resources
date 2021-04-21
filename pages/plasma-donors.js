@@ -2,22 +2,119 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import Link from 'next/link'
 import {
+    Tag,
     IconButton
   } from "@chakra-ui/react"
   import {FaHome} from 'react-icons/fa'
 export default function PlasmaDonors() {
-    
-    const [recoveredPatients, setRecoveredPatients] = useState([])
+
+        let states = [ "Andhra Pradesh",
+        "Arunachal Pradesh",
+        "Assam",
+        "Bihar",
+        "Chhattisgarh",
+        "Goa",
+        "Gujarat",
+        "Haryana",
+        "Himachal Pradesh",
+        "Jammu and Kashmir",
+        "Jharkhand",
+        "Karnataka",
+        "Kerala",
+        "Madhya Pradesh",
+        "Maharashtra",
+        "Manipur",
+        "Meghalaya",
+        "Mizoram",
+        "Nagaland",
+        "Odisha",
+        "Punjab",
+        "Rajasthan",
+        "Sikkim",
+        "Tamil Nadu",
+        "Telangana",
+        "Tripura",
+        "Uttarakhand",
+        "Uttar Pradesh",
+        "West Bengal",
+        "Andaman and Nicobar Islands",
+        "Chandigarh",
+        "Dadra and Nagar Haveli",
+        "Daman and Diu",
+        "Delhi",
+        "Lakshadweep",
+        "Puducherry"]
+    const [recoveredPatients,setRecoveredPatients] = useState([])
+    const [stateFilter, setStateFilter] = useState("")
+    const [loading, setLoading] = useState(true)
+    var count =0;
     console.log(recoveredPatients)
-    useEffect(() => {
-        axios.get('/api/recovered')
-        .then(res => {
-            setRecoveredPatients(res.data)
-            // console.log(recoveredPatients)
-        })
+    useEffect(() => { 
+    axios.get('/api/recovered')
+    .then(res => {
+   setRecoveredPatients(res.data)
+    setLoading(false)
+    console.log(stateFilter)
+    })
     }, [])
+
+    useEffect(async() => {
+
+    const mongodata = {
+        search: stateFilter
+    };
+
+    await axios.post('/api/recovered', mongodata)
+    .then(res => {
+        console.log("res is ",res.data)
+    setRecoveredPatients(res.data)
+        // setResponse(res.data.message)
+    })
+    .catch(err=>{  
+        console.log("error is ",err.response.data)
+    })
+
+    }, [stateFilter])
+        
+    
+    // console.log(recoveredPatients)
+    // useEffect(() => {
+    //     axios.get('/api/recovered')
+    //     .then(res => {
+    //         setRecoveredPatients(res.data)
+    //         // console.log(recoveredPatients)
+    //     })
+    // }, [])
     return (
         <div style={{minHeight: '100vh', background: '#0dc5c1'}} className="PlasmaDonorsList">
+             <div className="flex flex-wrap justify-center">
+            {
+                stateFilter==="All"?(
+                    <Tag className="m-2" colorScheme="blue" variant="solid">All</Tag>
+                ):(
+                    <Tag onClick={()=>setStateFilter('All')} className="m-2 pointer-on-hover" colorScheme="gray" variant="outline">All</Tag>
+                )
+            }
+                {
+                    states.map((state)=>{
+                        if(state===stateFilter)
+                        {
+                            return (
+                                <Tag className="m-2" colorScheme="blue" variant="solid">{state}</Tag>
+                            )
+                        }
+                        else
+                        {
+                            return (
+                                <Tag key={state} onClick={()=>{
+                                    setStateFilter(state)
+                                    setLoading(true)
+                                }} className="m-2 pointer-on-hover" colorScheme="gray" variant="outline">{state}</Tag>
+                            )
+                        }
+                    })
+                }
+            </div>
             <h2 className="text-3xl text-center text-white p-4">
                 <Link href="/" passHref>
                     <IconButton colorScheme="blue" className="text-white mx-4" aria-label="Home Button" icon={<FaHome/>}/>

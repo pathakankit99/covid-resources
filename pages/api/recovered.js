@@ -45,8 +45,44 @@ recovered.get(async(req,res)=>{
 recovered.post(async(req, res) => {
     const {db} = await connectToDatabase();
         if(req.method === 'POST'){
-            const {name, age, contact, bloodgroup, dor, state, city, id} = req.body;
+            const {name, age, contact, bloodgroup, dor, state, city, id, search} = req.body;
             // console.log(req.body)
+           if(search)
+           {
+            const collection = db.collection("recovered");
+                // console.log(collection)
+                try{
+                    // query for movies that have a runtime less than 15 minutes
+                        let query = { state: search };
+                        if(search==="All")
+                        query={}
+                        const options = {
+                        // sort returned documents in ascending order by title (A->Z)
+                        sort: { since: -1 },
+                        // Include only the `title` and `imdb` fields in each returned document
+                        projection: { },
+                        };
+
+                    const cursor = await collection.find(query, options);
+
+                    // print a message if no documents were found
+                    if ((await cursor.count()) === 0) {
+                        console.log("No documents found!");
+                        return res.status(404).send("No documents found")
+                    }
+                    // replace console.dir with your callback to access individual elements
+                    var result=[]
+                    await cursor.forEach((dir)=>result.push(dir));
+
+                    return res.status(200).send(result)
+                }
+                catch (error){
+                    console.log(error)
+                    return res.status(500).send(error.message);
+                }
+           }
+           else
+           {
             if(name && (contact || id) && state && city)
             {
                 
@@ -98,6 +134,7 @@ recovered.post(async(req, res) => {
             else{
                 res.status(422).send('Fill all fields');
             }
+           }
         }
         else{
             res.status(422).send('Non supported request method');
