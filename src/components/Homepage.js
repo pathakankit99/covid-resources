@@ -7,9 +7,10 @@ export default function Homepage() {
             <h2 className="bg-blue-700 text-white px-2 py-3 ">NOTE:
             Please check your nearest <b>Jan Aushadhi Kendra</b> for Remdesivir and please take patient's aadhar card, covid positive report, original prescription, and aadhar of the person buying the medicine.
             </h2>
+            <h2 className="bg-yellow-700 text-white text-sm px-2 py-3 ">NOTE: visit <a target="_blank" href="https://covid19-twitter.in"><b>Here</b></a> to get even more info from twitter regarding resources
+            </h2>
             <AddData/>
             <DisplayData/>
-            <h3 className="bg-blue-700 text-white absolute bottom-0 px-2 py-3 w-full ">Note: Share the info on the website and contribute to the site. Contact Ankit Pathak through email: ankitpathak143192@gmail.com or <a href="tel:7031785903">Click here to call</a> <a target="_blank" href="https://instagram.com/pathakankit99">..</a> for website related problem</h3>
         </div>
     );
 }
