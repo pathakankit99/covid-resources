@@ -18,7 +18,7 @@ oxygen.get(async(req,res)=>{
             const query = { };
             const options = {
             // sort returned documents in ascending order by title (A->Z)
-            sort: { state: 1 },
+            sort: { since: -1 },
             // Include only the `title` and `imdb` fields in each returned document
             projection: { },
             };
@@ -58,7 +58,7 @@ oxygen.post(async(req, res) => {
                         query={}
                         const options = {
                         // sort returned documents in ascending order by title (A->Z)
-                        sort: { state: 1 },
+                        sort: { since: -1 },
                         // Include only the `title` and `imdb` fields in each returned document
                         projection: { },
                         };
@@ -93,7 +93,7 @@ oxygen.post(async(req, res) => {
                         // console.log(query)
                         const options = {
                             
-                        sort: { contact: -1 },
+                        sort: {since: -1 },
                         // Include only the `name` and `contact` fields in the returned document
                         projection: { _id: 1, name: 1},
                         };
