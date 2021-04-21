@@ -9,7 +9,7 @@ export default function Homepage() {
             </h2>
             <AddData/>
             <DisplayData/>
-            <h3 className="bg-blue-700 text-white absolute bottom-0 px-2 py-3 w-full ">Note: Let's unite in this fight against covid. Share the info on the website and contribute to the site. Made by Ankit Pathak</h3>
+            <h3 className="bg-blue-700 text-white absolute bottom-0 px-2 py-3 w-full ">Note: Let's unite in this fight against covid. Share the info on the website and contribute to the site. contact <a target="_blank" href="https://instagram.com/pathakankit99">Ankit Pathak</a> for website related problem</h3>
         </div>
     );
 }

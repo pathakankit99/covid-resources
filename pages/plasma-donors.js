@@ -22,7 +22,7 @@ export default function PlasmaDonors() {
                 <Link href="/" passHref>
                     <IconButton colorScheme="blue" className="text-white mx-4" aria-label="Home Button" icon={<FaHome/>}/>
                 </Link>
-                Covid Recovered Patients List</h2>
+                Plasma Source</h2>
                 {
                    recoveredPatients.length>0?(
                     recoveredPatients.map((item) => {
