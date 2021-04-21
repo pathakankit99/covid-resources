@@ -23,7 +23,7 @@ recovered.get(async(req,res)=>{
             projection: { },
             };
 
-        const cursor = await collection.find();
+        const cursor = await collection.find(query, options);
 
         // print a message if no documents were found
         if ((await cursor.count()) === 0) {
