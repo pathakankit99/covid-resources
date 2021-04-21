@@ -45,7 +45,11 @@ export default function PlasmaDonors() {
                             <div className="w-full md:w-3/12">
                                 <h6>State: {item.state}</h6>
                                 <h6>City: {item.city}</h6>
-                                <h6>Contact: <a href={"tel:+91"+item.contact}>{item.contact}</a> </h6>
+                                {
+                                    item.contact?(<><h6>Contact: <a href={"tel:+91"+item.contact}>{item.contact}</a> </h6></>):(
+                                        <><h6>Social Media ID: {item.id}</h6></>
+                                    )
+                                }
                             </div>
                             <div className="w-full md:w-3/12">
                                 {

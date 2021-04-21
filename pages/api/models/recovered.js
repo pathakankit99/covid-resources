@@ -19,6 +19,10 @@ var recovered = new Schema({
     type: String,
     required: false
   },
+  id: {
+    type: String,
+    required: false
+  },
   dor: {
     type: Date,
     required: false

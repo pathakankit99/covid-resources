@@ -45,9 +45,9 @@ recovered.get(async(req,res)=>{
 recovered.post(async(req, res) => {
     const {db} = await connectToDatabase();
         if(req.method === 'POST'){
-            const {name, age, contact, bloodgroup, dor, state, city} = req.body;
+            const {name, age, contact, bloodgroup, dor, state, city, id} = req.body;
             // console.log(req.body)
-            if(name && contact && state && city)
+            if(name && (contact || id) && state && city)
             {
                 
                 try{
@@ -72,6 +72,7 @@ recovered.post(async(req, res) => {
                     person.dor=dor;
                     person.state=state;
                     person.city=city;
+                    person.id=id;
                     // var property = new Property({
                     //     title,
                     //     description,

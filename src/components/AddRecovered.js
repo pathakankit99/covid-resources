@@ -18,8 +18,9 @@ import {
 export default function AddRecovered() {  
     const [response, setResponse] = useState("") 
     const [name, setName] = useState("")
-    const [age, setAge] = useState(null)
-    const [contact, setContact] = useState(null)
+    const [age, setAge] = useState(undefined)
+    const [contact, setContact] = useState(undefined)
+    const [id, setId] = useState("")
     const [bloodgroup, setBloodgroup] = useState("")
     const [dor, setDor] = useState("")
     const [state, setState] = useState("")
@@ -48,15 +49,45 @@ export default function AddRecovered() {
             name,
             age,
             contact,
+            id,
             bloodgroup,
             dor,
             state,
             city
        };
 
-       if(phonenumber())
-       {
-           
+      if(contact)
+      {
+        if(phonenumber())
+        {
+            
+         await axios.post('/api/recovered', mongodata)
+         .then(res => {
+             // console.log("res is ",res)
+             setResponse(res.data.message)
+             if(res.data.message==='Details added successfully')
+             {
+                 setName("")
+                 setAge("")
+                 setContact("")
+                 setBloodgroup("")
+                 setState("")
+                 setCity("")
+                 setDor(undefined)
+             }
+ 
+         })
+         .catch(err=>{  
+             console.log("error is ",err.response.data)  
+             setResponse(err.response.data)
+         })
+        }
+        else
+        {
+            setResponse("Invalid phone number")
+        }
+      }
+      else{
         await axios.post('/api/recovered', mongodata)
         .then(res => {
             // console.log("res is ",res)
@@ -69,7 +100,7 @@ export default function AddRecovered() {
                 setBloodgroup("")
                 setState("")
                 setCity("")
-                setDor(null)
+                setDor(undefined)
             }
 
         })
@@ -77,11 +108,7 @@ export default function AddRecovered() {
             console.log("error is ",err.response.data)  
             setResponse(err.response.data)
         })
-       }
-       else
-       {
-           setResponse("Invalid phone number")
-       }
+      }
     }
     return (
         <div onClick={onOpen} className="action-card pointer-on-hover text-center bg-gray-800 flex items-center text-white p-4 m-4">
@@ -124,6 +151,15 @@ export default function AddRecovered() {
                         variant="flushed"
                         value={contact}
                         onChange={(e)=>setContact(e.target.value)}
+                        required
+                    />
+                    <Input
+                        onChange={(e)=>setId(e.target.value)}
+                        type="text"
+                        placeholder="Insta/Twitter ID"
+                        size="sm"
+                        variant="flushed"
+                        value={id}
                         required
                     />
                     <Select
