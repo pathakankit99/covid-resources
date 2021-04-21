@@ -34,8 +34,9 @@ export default function Medicine() {
 
         function phonenumber()
         {
-        var phoneno = /^\d{10}$/;
-        if(contact.match(phoneno))
+            var phoneno = /^\d{10}$/;
+            var phoneno2 = /^\d{11}$/;
+            if(contact.match(phoneno)|| contact.match(phoneno2))
                 {
                     console.log("phone number is valid")
             return true;
