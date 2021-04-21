@@ -55,6 +55,7 @@ export default function MedicineSuppliers() {
             console.log(stateFilter)
         })
     }, [])
+    var count=0;
 
     useEffect(async() => {
        
@@ -111,10 +112,16 @@ export default function MedicineSuppliers() {
                 {
                     oxygenSupply.length>0||loading===false?(
                         oxygenSupply.map((item) => {
+                            count = count+1;
                             return (
                                 <div key={item._id} className="text-xs p-4 bg-white rounded flex flex-wrap justify-evenly m-2">
                                 <div className="w-full md:w-3/12">
                                     <h3 className="font-bold uppercase text-lg">{item.name}</h3>
+                                    {
+                                        count<=3?(<>
+                                        <span className="bg-yellow-500 text-xs text-white px-3 rounded-xl py-1 ">New</span>
+                                        </>):(<></>)
+                                    }
                                 </div>
                                 <div className="w-full md:w-3/12">
                                     <h6>State: {item.state}</h6>
@@ -124,7 +131,7 @@ export default function MedicineSuppliers() {
                                 <div className="w-full md:w-3/12 font-bold">        
                                     {
                                         item.fabiflu?(
-                                            <h6>Fibiflu</h6>
+                                            <h6>Fabiflu</h6>
                                         ):(<></>)
                                     }
                                     {

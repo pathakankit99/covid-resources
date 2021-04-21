@@ -46,6 +46,7 @@ export default function OxygenSuppliers() {
     const [oxygenSupply, setOxygenSupply] = useState([])
     const [stateFilter, setStateFilter] = useState("")
     const [loading, setLoading] = useState(true)
+    var count =0;
     console.log(oxygenSupply)
     useEffect(() => { 
         axios.get('/api/oxygen')
@@ -111,10 +112,16 @@ export default function OxygenSuppliers() {
                 {
                     oxygenSupply.length>0||loading===false?(
                         oxygenSupply.map((item) => {
+                            count=count+1;
                             return (
                                 <div key={item._id} className="text-xs p-4 bg-white rounded flex flex-wrap justify-evenly m-2">
                                 <div className="w-full md:w-3/12">
                                     <h3 className="font-bold uppercase text-lg">{item.name}</h3>
+                                    {
+                                        count<=3?(<>
+                                        <span className="bg-yellow-500 text-xs text-white px-3 rounded-xl py-1 ">New</span>
+                                        </>):(<></>)
+                                    }
                                 </div>
                                 <div className="w-full md:w-3/12">
                                     <h6>State: {item.state}</h6>
