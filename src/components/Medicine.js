@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import axios from 'axios'
 import {
+    Checkbox,
     Button,
     Modal,
     ModalOverlay,
@@ -14,17 +15,19 @@ import {
     Input,
     Select
   } from "@chakra-ui/react"
-  
-export default function AddRecovered() {  
+
+export default function Medicine() {
     const [response, setResponse] = useState("") 
     const [name, setName] = useState("")
-    const [age, setAge] = useState(null)
     const [contact, setContact] = useState(null)
-    const [bloodgroup, setBloodgroup] = useState("")
-    const [dor, setDor] = useState("")
     const [state, setState] = useState("")
     const [city, setCity] = useState("")
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [medicine1, setMedicine1] = useState(false)
+    const [medicine2, setMedicine2] = useState(false)
+    const [medicine3, setMedicine3] = useState(false)
+    
+    // console.log("fabiflue is ",medicine1)
 
     const handleSubmit= async (e)=>{
         e.preventDefault()
@@ -33,43 +36,39 @@ export default function AddRecovered() {
         {
         var phoneno = /^\d{10}$/;
         if(contact.match(phoneno))
-            {
-                console.log("phone number is valid")
-                return true;
-            }
+                {
+                    console.log("phone number is valid")
+            return true;
+                }
             else
-            {
-                console.log("phone number is invalid")
+                {
+                    console.log("phone number is invalid")
                 return false;
-            }
+                }
         }
 
         const mongodata = {
             name,
-            age,
             contact,
-            bloodgroup,
-            dor,
             state,
-            city
+            city,
+            fabiflu: medicine1,
+            remdesivir: medicine2,
+            tocilizumab: medicine3,
        };
-
        if(phonenumber())
        {
            
-        await axios.post('/api/recovered', mongodata)
+        await axios.post('/api/medicine', mongodata)
         .then(res => {
             // console.log("res is ",res)
             setResponse(res.data.message)
             if(res.data.message==='Details added successfully')
             {
                 setName("")
-                setAge("")
                 setContact("")
-                setBloodgroup("")
                 setState("")
                 setCity("")
-                setDor(null)
             }
 
         })
@@ -80,26 +79,26 @@ export default function AddRecovered() {
        }
        else
        {
-           setResponse("Invalid phone number")
+           setResponse("Phone number not valid")
        }
     }
     return (
         <div onClick={onOpen} className="action-card pointer-on-hover text-center bg-gray-800 flex items-center text-white p-4 m-4">
                <div>
-               <h3 className="pb-4 text-3xl"> Know a plasma bank or recovered person?</h3>
+               <h3 className="pb-4 text-3xl">Do you know Medicine Supplier?</h3>
                <h6 className="">Add to our database</h6>
                </div>
-
-            <Modal isOpen={isOpen} onClose={onClose}>
+               <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
-                <ModalHeader>Add Plasma Info</ModalHeader>
+                <ModalHeader>Add Medicine Supplier Info</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                 <Stack spacing={3}>
                     {
                         response?(<h3 className="text-xs bg-yellow-200 p-2">{response}</h3>):(<></>)
                     }
+                    <h5 className="text-sm p-1 bg-blue-200">All fields are important</h5>
                     <Input
                         onChange={(e)=>setName(e.target.value)}
                         type="text"
@@ -107,15 +106,6 @@ export default function AddRecovered() {
                         size="sm"
                         variant="flushed"
                         value={name}
-                        required
-                    />
-                    <Input
-                        type="number"
-                        placeholder="Age"
-                        size="sm"
-                        variant="flushed"
-                        value={age}
-                        onChange={(e)=>setAge(e.target.value)}
                     />
                     <Input
                         type="number"
@@ -124,43 +114,12 @@ export default function AddRecovered() {
                         variant="flushed"
                         value={contact}
                         onChange={(e)=>setContact(e.target.value)}
-                        required
-                    />
-                    <Select
-                        size="sm"
-                        variant="flushed"                                    
-                        value={bloodgroup}
-                        onChange={(e)=>setBloodgroup(e.target.value)}
-                    >
-                        <option value="" >Select Blood Group</option>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="A">A Unknown</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="B">B Unknown</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                        <option value="AB">AB Unknown</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                        <option value="O">O Unknown</option>
-                    </Select>
-                    <h5 className="text-sm p-1 bg-blue-200">Enter date of recovery below:</h5>
-                    <Input
-                        type="date"
-                        placeholder="Date of Recovery"
-                        size="sm"
-                        variant="flushed"
-                        value={dor}
-                        onChange={(e)=>setDor(e.target.value)}
                     />
                      <Select
                         size="sm"
                         variant="flushed"                                    
                         value={state}
                         onChange={(e)=>setState(e.target.value)}
-                        required
                     >
                         <option value="" >Select State</option>
                         <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -207,8 +166,18 @@ export default function AddRecovered() {
                         variant="flushed"
                         value={city}
                         onChange={(e)=>setCity(e.target.value)}
-                        required
                     />
+                    <Stack spacing={10} direction="row">
+                        <Checkbox onChange={(e)=>setMedicine1(!medicine1)} colorScheme="green">
+                            Fabiflu
+                        </Checkbox>
+                        <Checkbox onChange={(e)=>setMedicine2(!medicine2)} colorScheme="green">
+                            Remdesivir
+                        </Checkbox>
+                        <Checkbox onChange={(e)=>setMedicine3(!medicine3)} colorScheme="green">
+                            Tocilizumab
+                        </Checkbox>
+                    </Stack>
                     <h6 className="text-xs p-1 bg-green-200">By Clicking on the submit button you acknowledge that this data will be displayed in public.</h6>
                 </Stack>
                 </ModalBody>

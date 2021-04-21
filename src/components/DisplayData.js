@@ -26,6 +26,14 @@ export default function DisplayData() {
                 </div>
                 </Link>
              </div>
+             <div className="action-card pointer-on-hover text-center bg-gray-800 flex items-center text-white p-4 m-4">
+                <Link href="/medicine-suppliers">
+                <div>
+                <h3 className="pb-4 text-3xl"> Medicine Suppliers List</h3>
+                <h6 className="">Click here</h6>
+                </div>
+                </Link>
+             </div>
         </div>
     );
 }
