@@ -9,6 +9,11 @@ export default function Homepage() {
             </h2>
             <h2 className="bg-yellow-700 text-white text-sm px-2 py-3 ">NOTE: visit <a target="_blank" href="https://covid19-twitter.in"><b>Here</b></a> to get even more info from twitter regarding resources
             </h2>
+            <h2 className="bg-green-700 text-white text-sm px-2 py-3 ">NOTE: visit <a target="_blank" href="https://drive.google.com/file/d/1Uza9If3EtULotIv-LPfkzQEB-jbOUBCY/view?usp=sharing"><b>Here</b></a> For Remdesivir distributors
+            </h2>
+            <h2 className="bg-green-700 text-white text-sm px-2 py-3 ">NOTE: visit <a target="_blank" href="https://drive.google.com/file/d/1wy1w0-osmNm0ks-Rj2qVYFoXl7n3drwE/view"><b>Here</b></a> For Tocilizumab distributors
+            </h2>
+            <AddData/>
             <AddData/>
             <DisplayData/>
         </div>
