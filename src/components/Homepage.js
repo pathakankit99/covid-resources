@@ -14,7 +14,6 @@ export default function Homepage() {
             <h2 className="bg-green-700 text-white text-sm px-2 py-3 ">NOTE: visit <a target="_blank" href="https://drive.google.com/file/d/1wy1w0-osmNm0ks-Rj2qVYFoXl7n3drwE/view"><b>Here</b></a> For Tocilizumab distributors
             </h2>
             <AddData/>
-            <AddData/>
             <DisplayData/>
         </div>
     );
